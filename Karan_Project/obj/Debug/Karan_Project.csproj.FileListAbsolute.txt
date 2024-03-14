@@ -1,0 +1,12 @@
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\bin\Debug\Karan_Project.exe.config
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\bin\Debug\Karan_Project.exe
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\bin\Debug\Karan_Project.pdb
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.csproj.AssemblyReference.cache
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.Form1.resources
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.Properties.Resources.resources
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.csproj.GenerateResource.cache
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.csproj.CoreCompileInputs.cache
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.exe
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.pdb
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\bin\Debug\Karan_Project.xml
+C:\Users\karan\source\repos\Karan_Project\Karan_Project\obj\Debug\Karan_Project.WindowsFormsCar.resources

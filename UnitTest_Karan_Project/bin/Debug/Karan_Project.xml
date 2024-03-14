@@ -1,0 +1,658 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Karan_Project</name>
+    </assembly>
+    <members>
+        <member name="T:Karan_Project.CommandParser">
+            <summary>
+            Parses commands and executes drawing operations.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.#ctor">
+            <summary>
+            Initializes a new instance of the CommandParser class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.reset">
+            <summary>
+            Resets the drawing parameters.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.DrawCursor(System.Drawing.Graphics)">
+            <summary>
+            Resets the drawing parameters.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.InitialCursor(System.Drawing.Graphics)">
+            <summary>
+            Resets the drawing parameters.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.setVariables(System.String,System.Int32)">
+            <summary>
+            Sets the value of a variable in the variables dictionary.
+            If the variable already exists, its value is updated; otherwise, a new key-value pair is added.
+            </summary>
+            <param name="cmd">The name of the variable.</param>
+            <param name="num">The value to set for the variable.</param>
+        </member>
+        <member name="M:Karan_Project.CommandParser.CheckSingleCommand(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Checks if a single command is valid.
+            </summary>
+            <param name="commandList">List of valid commands.</param>
+            <param name="command">Command to validate.</param>
+            <returns>True if the command is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.CheckPositiveAndNegative(System.String)">
+            <summary>
+            Checks if a number is positive or negative.
+            </summary>
+            <param name="num">Number to check.</param>
+            <returns>True if the number is positive; otherwise, false.</returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.CheckIntegerOrNot(System.String)">
+            <summary>
+            Checks if the given parameter is a valid integer or if it refers to a variable holding an integer value.
+            </summary>
+            <param name="param">The parameter to be checked for being an integer or a variable.</param>
+            <returns>
+            True if the parameter is a valid integer or a variable holding an integer value; otherwise, false.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Karan_Project.CommandParser.isTrueCondition(System.String,System.String)" -->
+        <member name="M:Karan_Project.CommandParser.CheckCondition(System.String)">
+            <summary>
+            Checks if a given condition contains a valid comparison operator from the <see cref="F:Karan_Project.CommandParser.conditionList"/>.
+            If found, evaluates the condition using the <see cref="M:Karan_Project.CommandParser.isTrueCondition(System.String,System.String)"/> method.
+            </summary>
+            <param name="condition">The condition to be checked and evaluated.</param>
+            <returns>
+            True if the condition is true based on the comparison operator; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.OperatorVariable(System.String,System.String)">
+            <summary>
+            Applies arithmetic operations on a variable based on the specified arithmetic operator.
+            </summary>
+            <param name="condition">The condition containing the variable and value.</param>
+            <param name="item">The arithmetic operator (e.g., "+", "+=", "-", "-=").</param>
+        </member>
+        <member name="M:Karan_Project.CommandParser.CheckParameter(System.String,System.String)">
+            <summary>
+            Validates a command and its parameters.
+            </summary>
+            <param name="command">Command to validate.</param>
+            <param name="parameters">Parameters associated with the command.</param>
+            <param name="errorList">List to store error messages.</param>
+            <returns>True if the command and its parameters are valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.SliceText(System.String,System.String,System.String)">
+            <summary>
+            Slices the input text between the specified start and end words, returning a list of sliced texts.
+            </summary>
+            <param name="input">The input text to be sliced.</param>
+            <param name="startWord">The starting word or substring for slicing (exclusive).</param>
+            <param name="endWord">The ending word or substring for slicing (exclusive).</param>
+            <returns>
+            A list of sliced texts between the specified start and end words.
+            </returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.ValidateParameterCountAndType(System.String[],System.Int32,System.String,System.String[])">
+            <summary>
+            Validates the count and type of parameters.
+            </summary>
+            <param name="param">An array of parameters.</param>
+            <param name="expectedCount">The expected count of parameters.</param>
+            <param name="expectedType">The expected type of parameters.</param>
+            <param name="errorList">The list to store error messages.</param>
+            <param name="validColors">Optional valid colors for color type parameters.</param>
+            <returns>True if parameters are valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.ValidateFillParameter(System.String[])">
+            <summary>
+            Validates the fill parameter.
+            </summary>
+            <param name="param">An array of parameters.</param>
+            <param name="errorList">The list to store error messages.</param>
+            <returns>True if the fill parameter is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.SetPenColor(System.String)">
+            <summary>
+            Sets the pen color based on the provided color string.
+            </summary>
+            <param name="color">The color string to set the pen color.</param>
+        </member>
+        <member name="M:Karan_Project.CommandParser.clearFun(System.Drawing.Graphics)">
+            <summary>
+            Clears the graphics area with a specified color.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.CommandParser.getNum(System.String)">
+            <summary>
+            Retrieves the numeric value associated with the specified parameter.
+            If the parameter is a key in the 'variables' dictionary, the corresponding value is returned.
+            Otherwise, the parameter is parsed as an integer and returned.
+            </summary>
+            <param name="param">The parameter for which to retrieve the numeric value.</param>
+            <returns>
+            The numeric value associated with the parameter.
+            </returns>
+        </member>
+        <member name="M:Karan_Project.CommandParser.CommandExecute(System.String,System.Drawing.Graphics)">
+            <summary>
+            Executes a specific command based on the input provided.
+            </summary>
+            <param name="commands">The command to execute.</param>
+            <param name="g">The graphics object used for drawing.</param>
+        </member>
+        <member name="T:Karan_Project.Circle">
+            <summary>
+            Represents a Circle shape.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Circle.#ctor">
+            <summary>
+            Initializes a new instance of the Circle class with default values.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Circle.#ctor(System.Drawing.Color,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the Circle class with specified color, position, and radius.
+            </summary>
+            <param name="colour">Color of the circle.</param>
+            <param name="x">X-coordinate of the center.</param>
+            <param name="y">Y-coordinate of the center.</param>
+            <param name="radius">Radius of the circle.</param>
+        </member>
+        <member name="M:Karan_Project.Circle.#ctor(System.Drawing.Color,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the Circle class with specified color, fill status, position, and radius.
+            </summary>
+            <param name="colour">Color of the circle.</param>
+            <param name="fill">Boolean indicating whether the circle should be filled.</param>
+            <param name="x">X-coordinate of the center.</param>
+            <param name="y">Y-coordinate of the center.</param>
+            <param name="radius">Radius of the circle.</param>
+        </member>
+        <member name="M:Karan_Project.Circle.set(System.Drawing.Color,System.Int32[])">
+            <summary>
+            Sets the properties of the circle with the specified color and parameters.
+            </summary>
+            <param name="colour">Color of the circle.</param>
+            <param name="list">Parameters: x-coordinate, y-coordinate, and radius.</param>
+        </member>
+        <member name="M:Karan_Project.Circle.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Sets the properties of the circle with the specified color, fill status, and parameters.
+            </summary>
+            <param name="colour">Color of the circle.</param>
+            <param name="fill">Boolean indicating whether the circle should be filled.</param>
+            <param name="list">Parameters: x-coordinate, y-coordinate, and radius.</param>
+        </member>
+        <member name="M:Karan_Project.Circle.draw(System.Drawing.Graphics)">
+            <summary>
+            Draws the circle on the provided graphics object.
+            </summary>
+            <param name="g">Graphics object to draw the circle.</param>
+        </member>
+        <member name="M:Karan_Project.Circle.ToString">
+            <summary>
+            Overrides the ToString method to provide shape information.
+            </summary>
+            <returns>A string representation of the circle's properties.</returns>
+        </member>
+        <member name="T:Karan_Project.DrawLine">
+            <summary>
+            Class DrawTo for line inherits from shape
+            </summary>
+        </member>
+        <member name="M:Karan_Project.DrawLine.#ctor">
+            <summary>
+            base class constructor called
+            </summary>
+            
+        </member>
+        <member name="M:Karan_Project.DrawLine.#ctor(System.Drawing.Color,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Overloading constructor and call overloaded base constructor
+            </summary>
+            <param name="color"></param>
+            <param name="fill"></param>
+            <param name="x2"></param>
+            <param name="y2"></param>
+        </member>
+        <member name="M:Karan_Project.DrawLine.draw(System.Drawing.Graphics)">
+            <summary>
+            Override draw method from base class implemented
+            </summary>
+            <param name="g"></param>
+        </member>
+        <member name="M:Karan_Project.DrawLine.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Override set method from base class implemented
+            </summary>
+            <param name="color"></param>
+            <param name="fill"></param>
+            <param name="list"></param>
+        </member>
+        <member name="T:Karan_Project.Form1">
+            <summary>
+            The main form of the application.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.#ctor">
+            <summary>
+            Initializes a new instance of the Form1 class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.ShowSuccessMessage">
+            <summary>
+            Display the Success Message
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.ShowErrorMessage">
+            <summary>
+            Display the Error Message
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.clearText">
+            <summary>
+            Clear the Editor
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.SingleLineCommand(System.String,System.String)">
+            <summary>
+            Executes a single line command based on the provided type.
+            </summary>
+            <param name="command">The command string.</param>
+            <param name="type">The type of command.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ProcessSingleCommand(System.String,System.String,System.String)">
+            <summary>
+            Processes a single command without parameters.
+            </summary>
+            <param name="singleCommand">The single command to process.</param>
+            <param name="type">The type of command.</param>
+            <param name="fullCommand">The full command string.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ProcessCommandWithParameters(System.String,System.String,System.String,System.String)">
+            <summary>f
+            Processes a command with parameters, validating the command and its parameters.
+            </summary>
+            <param name="command">The command string.</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <param name="type">The type of command.</param>
+            <param name="fullCommand">The full command string.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ProcessCommandExecution(System.String,System.String)">
+            <summary>
+            Executes a command based on the specified type.
+            </summary>
+            <param name="type">The type of command.</param>
+            <param name="fullCommand">The full command string.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ShowErrors">
+            <summary>
+            Display Success or Error Message
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.syntax_btn_click(System.Object,System.EventArgs)">
+            <summary>
+            Processes a single command without parameters.
+            </summary>
+            <param name="singleCommand">The single command to process.</param>
+            <param name="type">The type of command.</param>
+            <param name="fullCommand">The full command string.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.sliceCommandReceiver(System.String,System.String,System.String,System.String)">
+            <summary>
+            Receives and processes a sliced command based on specified start and end items.
+            </summary>
+            <param name="fullcommand">The full command to be sliced.</param>
+            <param name="startItem">The starting item for slicing.</param>
+            <param name="endItem">The ending item for slicing.</param>
+            <param name="type">The type of command.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ExecuteMethodCommand(System.String,System.String)">
+            <summary>
+            Executes a method command based on the provided full command and type.
+            </summary>
+            <param name="fullCommand">The full method command to be executed.</param>
+            <param name="type">The type of command.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ExecuteCommandReveiver(System.String,System.String)">
+            <summary>
+            Executes the provided command lines sequentially.
+            </summary>
+            <param name="fullCommand">The full command string containing multiple lines.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.run_btn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handles the click event of the 'Run' button, executing commands from multipleCommand and commandBox2 TextBoxes.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.ExecuteCommand(System.String,System.String)">
+            <summary>
+            Executes a command by invoking <see cref="!:ExecuteCommandReceiver"/> in a thread-safe manner.
+            </summary>
+            <param name="command">The command to execute.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.singleCommand_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Handles the KeyPress event for the singleCommand TextBox.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The KeyPressEventArgs.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.IterateCommandParser(System.String,System.String)">
+            <summary>
+            Iterates through a series of commands and executes them.
+            </summary>
+            <param name="command">The string containing multiple commands separated by newline characters.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.outputWindow_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Handles the Paint event of the outputWindow control.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The PaintEventArgs.</param>
+        </member>
+        <member name="F:Karan_Project.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Karan_Project.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Karan_Project.MethodsClass">
+            <summary>
+            Represents a class containing methods and related functionality.
+            </summary>
+        </member>
+        <member name="F:Karan_Project.MethodsClass.methodCommands">
+            <summary>
+            List of method commands.
+            </summary>
+        </member>
+        <member name="F:Karan_Project.MethodsClass.methodName">
+            <summary>
+            The name of the method.
+            </summary>
+        </member>
+        <member name="F:Karan_Project.MethodsClass.parse">
+            <summary>
+            Instance of the <see cref="T:Karan_Project.CommandParser"/> class for parsing commands.
+            </summary>
+        </member>
+        <member name="F:Karan_Project.MethodsClass.methodParams">
+            <summary>
+            Dictionary to store method parameters and their values.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.MethodsClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Karan_Project.MethodsClass"/> class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.MethodsClass.checkMehtod(System.String)">
+            <summary>
+            Checks if a method exists or is contained within the class.
+            </summary>
+            <param name="method">The method to check.</param>
+            <returns>True if the method exists, otherwise false.</returns>
+        </member>
+        <member name="M:Karan_Project.MethodsClass.ExtractMehtod(System.String,System.String)">
+            <summary>
+            Extracts the method call from the input string based on the provided function name.
+            </summary>
+            <param name="input">The input string containing the method call.</param>
+            <param name="functionName">The name of the function.</param>
+            <returns>The extracted method call.</returns>
+        </member>
+        <member name="M:Karan_Project.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Karan_Project.Rectangle">
+            <summary>
+            Represents a rectangle shape derived from the base Shape class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Rectangle.#ctor">
+            <summary>
+            Default constructor for Rectangle.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Rectangle.#ctor(System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor for Rectangle with specified parameters.
+            </summary>
+            <param name="colour">Color of the rectangle.</param>
+            <param name="x">X-coordinate of the rectangle.</param>
+            <param name="y">Y-coordinate of the rectangle.</param>
+            <param name="width">Width of the rectangle.</param>
+            <param name="height">Height of the rectangle.</param>
+        </member>
+        <member name="M:Karan_Project.Rectangle.#ctor(System.Drawing.Color,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor for Rectangle with specified parameters including fill.
+            </summary>
+            <param name="colour">Color of the rectangle.</param>
+            <param name="fill">Boolean indicating whether the rectangle is filled.</param>
+            <param name="x">X-coordinate of the rectangle.</param>
+            <param name="y">Y-coordinate of the rectangle.</param>
+            <param name="width">Width of the rectangle.</param>
+            <param name="height">Height of the rectangle.</param>
+        </member>
+        <member name="M:Karan_Project.Rectangle.set(System.Drawing.Color,System.Int32[])">
+            <summary>
+            Sets the attributes of the Rectangle.
+            </summary>
+            <param name="colour">The color of the Rectangle.</param>
+            <param name="list">List containing x, y, width, and height parameters.</param>
+        </member>
+        <member name="M:Karan_Project.Rectangle.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Sets the attributes of the Rectangle.
+            </summary>
+            <param name="colour">The color of the Rectangle.</param>
+            <param name="fill">Whether the Rectangle should be filled or not.</param>
+            <param name="list">List containing x, y, width, and height parameters.</param>
+        </member>
+        <member name="M:Karan_Project.Rectangle.draw(System.Drawing.Graphics)">
+            <summary>
+            Draws the Rectangle using the specified Graphics object.
+            </summary>
+            <param name="g">The Graphics object used for drawing.</param>
+        </member>
+        <member name="T:Karan_Project.Shape">
+            <summary>
+            Represents a basic shape.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Shape.#ctor">
+            <summary>
+            Default constructor for the Shape class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Shape.#ctor(System.Drawing.Color,System.Int32,System.Int32)">
+            <summary>
+            Constructor to initialize a Shape with specific attributes.
+            </summary>
+            <param name="colour">The color of the Shape.</param>
+            <param name="x">The X-coordinate of the Shape.</param>
+            <param name="y">The Y-coordinate of the Shape.</param>
+        </member>
+        <member name="M:Karan_Project.Shape.#ctor(System.Drawing.Color,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Constructor to initialize a Shape with specific attributes.
+            </summary>
+            <param name="colour">The color of the Shape.</param>
+            <param name="fill">Whether the Shape should be filled or not.</param>
+            <param name="x">The X-coordinate of the Shape.</param>
+            <param name="y">The Y-coordinate of the Shape.</param>
+        </member>
+        <member name="M:Karan_Project.Shape.draw(System.Drawing.Graphics)">
+            <summary>
+            Draws the shape using the specified Graphics object.
+            </summary>
+            <param name="g">The Graphics object used for drawing.</param>
+        </member>
+        <member name="M:Karan_Project.Shape.set(System.Drawing.Color,System.Int32[])">
+            <summary>
+            Sets the attributes of the shape.
+            </summary>
+            <param name="colour">The color of the shape.</param>
+            <param name="list">List containing x and y parameters.</param>
+        </member>
+        <member name="M:Karan_Project.Shape.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Sets the attributes of the shape.
+            </summary>
+            <param name="colour">The color of the shape.</param>
+            <param name="fill">Whether the shape should be filled or not.</param>
+            <param name="list">List containing x and y parameters.</param>
+        </member>
+        <member name="M:Karan_Project.Shape.ToString">
+            <summary>
+            Overrides the default ToString() method to display position coordinates.
+            </summary>
+        </member>
+        <member name="T:Karan_Project.ShapeFactory">
+            <summary>
+            Factory class responsible for creating shapes based on the provided shape type.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.ShapeFactory.getShape(System.String)">
+            <summary>
+            Gets the specific shape based on the provided shape type.
+            </summary>
+            <param name="shapeType">Type of the shape to create.</param>
+            <returns>A shape object based on the provided type.</returns>
+        </member>
+        <member name="T:Karan_Project.Shapes">
+            <summary>
+            Interface for defining shapes.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Shapes.set(System.Drawing.Color,System.Int32[])">
+            <summary>
+            Sets the shape's properties with the given color and parameters.
+            </summary>
+            <param name="c">Color to set for the shape.</param>
+            <param name="list">Parameters to define the shape.</param>
+        </member>
+        <member name="M:Karan_Project.Shapes.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Sets the shape's properties with the given color, fill status, and parameters.
+            </summary>
+            <param name="c">Color to set for the shape.</param>
+            <param name="fill">Boolean value indicating whether to fill the shape or not.</param>
+            <param name="list">Parameters to define the shape.</param>
+        </member>
+        <member name="M:Karan_Project.Shapes.draw(System.Drawing.Graphics)">
+            <summary>
+            Draws the shape on the provided graphics object.
+            </summary>
+            <param name="g">Graphics object to draw the shape.</param>
+        </member>
+        <member name="T:Karan_Project.Triangle">
+            <summary>
+            Represents a triangle shape.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Triangle.#ctor">
+            <summary>
+            Default constructor for Triangle class.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.Triangle.#ctor(System.Drawing.Color,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor for Triangle class with specified parameters.
+            </summary>
+            <param name="colour">The color of the triangle.</param>
+            <param name="fill">Determines if the triangle should be filled.</param>
+            <param name="x">X-coordinate of the first point.</param>
+            <param name="y">Y-coordinate of the first point.</param>
+            <param name="x2">X-coordinate of the second point.</param>
+            <param name="y2">Y-coordinate of the second point.</param>
+            <param name="x3">X-coordinate of the third point.</param>
+            <param name="y3">Y-coordinate of the third point.</param>
+        </member>
+        <member name="M:Karan_Project.Triangle.set(System.Drawing.Color,System.Int32[])">
+            <summary>
+            Sets the properties of the triangle using specified parameters.
+            </summary>
+            <param name="colour">The color of the triangle.</param>
+            <param name="list">List of integers specifying coordinates.</param>
+        </member>
+        <member name="M:Karan_Project.Triangle.set(System.Drawing.Color,System.Boolean,System.Int32[])">
+            <summary>
+            Sets the properties of the triangle using specified parameters.
+            </summary>
+            <param name="colour">The color of the triangle.</param>
+            <param name="fill">Determines if the triangle should be filled.</param>
+            <param name="list">List of integers specifying coordinates.</param>
+        </member>
+        <member name="M:Karan_Project.Triangle.draw(System.Drawing.Graphics)">
+            <summary>
+            Draws the triangle on the specified graphics object.
+            </summary>
+            <param name="g">The graphics object used for drawing.</param>
+        </member>
+        <member name="M:Karan_Project.Triangle.ToString">
+            <summary>
+            Returns a string representation of the triangle.
+            </summary>
+            <returns>A string containing information about the triangle.</returns>
+        </member>
+        <member name="F:Karan_Project.WindowsFormsCar.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Karan_Project.WindowsFormsCar.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Karan_Project.WindowsFormsCar.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Karan_Project.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Karan_Project.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Karan_Project.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

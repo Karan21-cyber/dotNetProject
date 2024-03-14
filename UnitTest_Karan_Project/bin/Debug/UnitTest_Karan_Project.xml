@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UnitTest_Karan_Project</name>
+    </assembly>
+    <members>
+        <member name="T:UnitTest_Karan_Project.UnitTest1">
+            <summary>
+            Unit tests for validating CommandParser and ShapeFactory functionalities.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestValidCommand">
+            <summary>
+            Test valid command check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestInvalidCommand">
+            <summary>
+            Test Invalid command check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestParameter">
+            <summary>
+            Test valid Parameter check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestParameterPositiveAndNegative">
+            <summary>
+            Test Positive or Negative Parameter.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestInvalidParameter">
+            <summary>
+            Test Invalid Parameter check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestColor">
+            <summary>
+            Test valid Color check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestFill">
+            <summary>
+            Test valid Fill check.
+            </summary>
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestShapeFactoryCircle">
+            <summary>
+            Test Shape Factory getShape method for Circle shape.
+            </summary> 
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestShapeFactoryRectangle">
+            <summary>
+            Test Shape Factory getShape method for Rectangle shape.
+            </summary> 
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestShapeFactoryTriangle">
+            <summary>
+            Test Shape Factory getShape method for Triangle shape.
+            </summary> 
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestDrawLine">
+            <summary>
+            Test Shape Factory getShape method for Draw Line.
+            </summary> 
+        </member>
+        <member name="M:UnitTest_Karan_Project.UnitTest1.TestInvalidShape">
+            <summary>
+            Testing error message when shape does not exist
+            </summary>
+        </member>
+    </members>
+</doc>
